@@ -22,123 +22,53 @@
     header {
       background: #0b7a3b;
       color: white;
-      padding: 18px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      padding: 20px;
+      text-align: center;
     }
 
-    .logo {
-      font-size: 22px;
-      font-weight: bold;
+    header h1 {
+      font-size: 28px;
+      margin-bottom: 6px;
+    }
+
+    header p {
+      font-size: 14px;
     }
 
     .hero {
-      background: linear-gradient(135deg, #0b7a3b, #12a653);
-      color: white;
-      padding: 45px 20px;
+      background: white;
+      padding: 35px 20px;
       text-align: center;
     }
 
-    .hero h1 {
-      font-size: 34px;
-      margin-bottom: 12px;
+    .hero h2 {
+      color: #0b7a3b;
+      font-size: 26px;
+      margin-bottom: 10px;
     }
 
     .hero p {
-      font-size: 17px;
-      margin-bottom: 25px;
-    }
-
-    .hero button {
-      background: white;
-      color: #0b7a3b;
-      border: none;
-      padding: 13px 25px;
-      border-radius: 8px;
-      font-weight: bold;
-      font-size: 16px;
+      margin-bottom: 20px;
+      color: #555;
     }
 
     .container {
-      max-width: 900px;
-      margin: auto;
-      padding: 30px 18px;
+      width: 92%;
+      max-width: 600px;
+      margin: 25px auto;
     }
 
-    .section-title {
-      text-align: center;
-      margin-bottom: 20px;
-      font-size: 25px;
-    }
-
-    .networks {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-bottom: 30px;
-    }
-
-    .network {
+    .card {
       background: white;
-      border: 2px solid #ddd;
-      border-radius: 10px;
-      padding: 18px 8px;
-      text-align: center;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .network:hover,
-    .network.active {
-      border-color: #0b7a3b;
-      background: #eaf8f0;
-    }
-
-    .bundles {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-    }
-
-    .bundle {
-      background: white;
-      border-radius: 12px;
       padding: 20px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-    }
-
-    .bundle h3 {
-      font-size: 24px;
-      color: #0b7a3b;
-      margin-bottom: 8px;
-    }
-
-    .bundle p {
-      color: #666;
-      margin-bottom: 15px;
-    }
-
-    .bundle button {
-      width: 100%;
-      background: #0b7a3b;
-      color: white;
-      border: none;
-      padding: 12px;
-      border-radius: 7px;
-      font-weight: bold;
-    }
-
-    .checkout {
-      background: white;
-      margin-top: 30px;
-      padding: 25px;
+      margin-bottom: 18px;
       border-radius: 12px;
       box-shadow: 0 3px 12px rgba(0,0,0,0.08);
     }
 
-    .checkout h2 {
-      margin-bottom: 20px;
+    .card h3 {
+      color: #0b7a3b;
+      margin-bottom: 15px;
     }
 
     label {
@@ -147,31 +77,37 @@
       font-weight: bold;
     }
 
+    select,
     input {
       width: 100%;
-      padding: 14px;
+      padding: 13px;
+      margin-bottom: 15px;
       border: 1px solid #ccc;
-      border-radius: 7px;
-      margin-bottom: 18px;
+      border-radius: 8px;
       font-size: 16px;
+      background: white;
     }
 
-    .pay-button {
+    button {
       width: 100%;
-      padding: 15px;
-      background: #0b7a3b;
-      color: white;
+      padding: 14px;
       border: none;
       border-radius: 8px;
+      background: #0b7a3b;
+      color: white;
       font-size: 17px;
       font-weight: bold;
+      cursor: pointer;
     }
 
-    .notice {
-      background: #fff8df;
-      border-left: 4px solid #e0a800;
-      padding: 12px;
-      margin-top: 18px;
+    button:hover {
+      background: #095f2f;
+    }
+
+    .info {
+      text-align: center;
+      padding: 20px;
+      color: #555;
       font-size: 14px;
     }
 
@@ -179,22 +115,9 @@
       background: #17202a;
       color: white;
       text-align: center;
-      padding: 25px;
+      padding: 20px;
       margin-top: 30px;
-    }
-
-    @media (max-width: 600px) {
-      .networks {
-        grid-template-columns: 1fr;
-      }
-
-      .bundles {
-        grid-template-columns: 1fr;
-      }
-
-      .hero h1 {
-        font-size: 28px;
-      }
+      font-size: 13px;
     }
   </style>
 </head>
@@ -202,138 +125,67 @@
 <body>
 
   <header>
-    <div class="logo">InfinityDataGH</div>
-    <div>🇬🇭</div>
+    <h1>InfinityDataGH</h1>
+    <p>Affordable Data Bundles • Fast • Simple • Reliable</p>
   </header>
 
   <section class="hero">
-    <h1>Affordable Data. Anytime.</h1>
-    <p>Buy your data bundles quickly and conveniently.</p>
-    <button onclick="document.getElementById('shop').scrollIntoView()">
-      Buy Data
-    </button>
+    <h2>Buy Data Easily</h2>
+    <p>Choose your network, select a bundle and enter the number you want to receive the data.</p>
   </section>
 
-  <main class="container" id="shop">
+  <div class="container">
 
-    <h2 class="section-title">Choose Your Network</h2>
+    <div class="card">
+      <h3>Buy a Data Bundle</h3>
 
-    <div class="networks">
-      <div class="network active" onclick="selectNetwork(this, 'MTN')">
-        🟡 MTN
-      </div>
+      <label for="network">Choose Network</label>
+      <select id="network">
+        <option value="">Select Network</option>
+        <option value="MTN">MTN</option>
+        <option value="Telecel">Telecel</option>
+        <option value="AirtelTigo">AirtelTigo</option>
+      </select>
 
-      <div class="network" onclick="selectNetwork(this, 'Telecel')">
-        🔴 Telecel
-      </div>
+      <label for="bundle">Choose Bundle</label>
+      <select id="bundle">
+        <option value="">Select Bundle</option>
+        <option value="1GB">1GB - GHS 5</option>
+        <option value="2GB">2GB - GHS 10</option>
+        <option value="5GB">5GB - GHS 20</option>
+        <option value="10GB">10GB - GHS 35</option>
+      </select>
 
-      <div class="network" onclick="selectNetwork(this, 'AT')">
-        🔵 AT
-      </div>
-    </div>
-
-    <h2 class="section-title">Choose Your Bundle</h2>
-
-    <div class="bundles">
-
-      <div class="bundle">
-        <h3>1GB</h3>
-        <p>Sample price: GH₵10</p>
-        <button onclick="selectBundle('1GB')">Select</button>
-      </div>
-
-      <div class="bundle">
-        <h3>2GB</h3>
-        <p>Sample price: GH₵18</p>
-        <button onclick="selectBundle('2GB')">Select</button>
-      </div>
-
-      <div class="bundle">
-        <h3>5GB</h3>
-        <p>Sample price: GH₵35</p>
-        <button onclick="selectBundle('5GB')">Select</button>
-      </div>
-
-      <div class="bundle">
-        <h3>10GB</h3>
-        <p>Sample price: GH₵60</p>
-        <button onclick="selectBundle('10GB')">Select</button>
-      </div>
-
-    </div>
-
-    <div class="checkout">
-
-      <h2>Complete Your Order</h2>
-
-      <label>Network</label>
-      <input id="network" type="text" value="MTN" readonly>
-
-      <label>Bundle</label>
-      <input id="bundle" type="text" placeholder="Select a bundle above" readonly>
-
-      <label>Phone Number</label>
+      <label for="phone">Phone Number</label>
       <input
-        id="phone"
         type="tel"
-        placeholder="05XXXXXXXX"
+        id="phone"
+        placeholder="e.g. 0241234567"
         maxlength="10"
       >
 
-      <button class="pay-button" onclick="startOrder()">
-        Continue to Payment
-      </button>
-
-      <div class="notice">
-        <strong>Important:</strong> These are demonstration prices for the
-        first version of InfinityDataGH. Real bundle prices and payments will
-        be connected later.
-      </div>
-
+      <button onclick="buyData()">Continue to Payment</button>
     </div>
 
-  </main>
+    <div class="info">
+      <p>Secure payments will be processed through Paystack.</p>
+      <p>Your data bundle will be delivered after successful payment.</p>
+    </div>
+
+  </div>
 
   <footer>
-    <p>© 2026 InfinityDataGH</p>
-    <p>Affordable Data. Anytime. Anywhere.</p>
+    <p>© 2026 InfinityDataGH. All rights reserved.</p>
   </footer>
 
   <script>
-
-    let selectedNetwork = "MTN";
-    let selectedBundle = "";
-
-    function selectNetwork(element, network) {
-
-      document.querySelectorAll(".network").forEach(function(item) {
-        item.classList.remove("active");
-      });
-
-      element.classList.add("active");
-
-      selectedNetwork = network;
-
-      document.getElementById("network").value = network;
-    }
-
-    function selectBundle(bundle) {
-
-      selectedBundle = bundle;
-
-      document.getElementById("bundle").value = bundle;
-
-      document.querySelector(".checkout").scrollIntoView({
-        behavior: "smooth"
-      });
-    }
-
-    function startOrder() {
-
+    function buyData() {
+      const network = document.getElementById("network").value;
+      const bundle = document.getElementById("bundle").value;
       const phone = document.getElementById("phone").value;
 
-      if (!selectedBundle) {
-        alert("Please select a data bundle.");
+      if (!network || !bundle || !phone) {
+        alert("Please fill in all the fields.");
         return;
       }
 
@@ -343,14 +195,13 @@
       }
 
       alert(
-        "Order selected!\\n\\n" +
-        "Network: " + selectedNetwork +
-        "\\nBundle: " + selectedBundle +
-        "\\nPhone: " + phone +
-        "\\n\\nPayment will be connected in the next stage."
+        "Order received!\\n\\n" +
+        "Network: " + network + "\\n" +
+        "Bundle: " + bundle + "\\n" +
+        "Phone: " + phone + "\\n\\n" +
+        "Payment integration will be connected next."
       );
     }
-
   </script>
 
 </body>
