@@ -6,6 +6,9 @@
 
   <title>InfinityDataGH | Affordable Data Bundles</title>
 
+  <!-- Paystack -->
+  <script src="https://js.paystack.co/v2/inline.js"></script>
+
   <style>
     * {
       box-sizing: border-box;
@@ -131,15 +134,20 @@
 
   <section class="hero">
     <h2>Buy Data Easily</h2>
-    <p>Choose your network, select a bundle and enter the number you want to receive the data.</p>
+    <p>
+      Choose your network, select a bundle and enter the number
+      you want to receive the data.
+    </p>
   </section>
 
   <div class="container">
 
     <div class="card">
+
       <h3>Buy a Data Bundle</h3>
 
       <label for="network">Choose Network</label>
+
       <select id="network">
         <option value="">Select Network</option>
         <option value="MTN">MTN</option>
@@ -148,15 +156,17 @@
       </select>
 
       <label for="bundle">Choose Bundle</label>
+
       <select id="bundle">
         <option value="">Select Bundle</option>
-        <option value="1GB">1GB - GHS 5</option>
-        <option value="2GB">2GB - GHS 10</option>
-        <option value="5GB">5GB - GHS 20</option>
-        <option value="10GB">10GB - GHS 35</option>
+        <option value="1GB" data-price="5">1GB - GHS 5</option>
+        <option value="2GB" data-price="10">2GB - GHS 10</option>
+        <option value="5GB" data-price="20">5GB - GHS 20</option>
+        <option value="10GB" data-price="35">10GB - GHS 35</option>
       </select>
 
       <label for="phone">Phone Number</label>
+
       <input
         type="tel"
         id="phone"
@@ -164,44 +174,230 @@
         maxlength="10"
       >
 
-      <button onclick="buyData()">Continue to Payment</button>
+      <label for="email">Email Address</label>
+
+      <input
+        type="email"
+        id="email"
+        placeholder="e.g. customer@email.com"
+      >
+
+      <button onclick="buyData()">
+        Continue to Payment
+      </button>
+
     </div>
 
     <div class="info">
-      <p>Secure payments will be processed through Paystack.</p>
-      <p>Your data bundle will be delivered after successful payment.</p>
+
+      <p>
+        Secure payments will be processed through Paystack.
+      </p>
+
+      <p>
+        Your data bundle will be delivered after successful payment.
+      </p>
+
     </div>
 
   </div>
 
   <footer>
-    <p>© 2026 InfinityDataGH. All rights reserved.</p>
+
+    <p>
+      © 2026 InfinityDataGH. All rights reserved.
+    </p>
+
   </footer>
 
+
   <script>
+
+    /*
+      IMPORTANT:
+      Replace the text below with your PAYSTACK TEST PUBLIC KEY.
+
+      Example format:
+      pk_test_xxxxxxxxxxxxxxxxxxxxx
+    */
+
+    const PAYSTACK_PUBLIC_KEY =
+      "pk_test_ff4011e8141ffe67399084e17126db97c68c0dd6";
+
+
     function buyData() {
-      const network = document.getElementById("network").value;
-      const bundle = document.getElementById("bundle").value;
-      const phone = document.getElementById("phone").value;
 
-      if (!network || !bundle || !phone) {
+      const network =
+        document.getElementById("network").value;
+
+      const bundle =
+        document.getElementById("bundle").value;
+
+      const phone =
+        document.getElementById("phone").value;
+
+      const email =
+        document.getElementById("email").value;
+
+
+      /* Check that all fields are completed */
+
+      if (!network || !bundle || !phone || !email) {
+
         alert("Please fill in all the fields.");
+
         return;
       }
 
-      if (phone.length !== 10 || !phone.startsWith("0")) {
-        alert("Please enter a valid Ghana phone number.");
+
+      /* Check Ghana phone number */
+
+      if (
+        phone.length !== 10 ||
+        !phone.startsWith("0")
+      ) {
+
+        alert(
+          "Please enter a valid Ghana phone number."
+        );
+
         return;
       }
 
-      alert(
-        "Order received!\\n\\n" +
-        "Network: " + network + "\\n" +
-        "Bundle: " + bundle + "\\n" +
-        "Phone: " + phone + "\\n\\n" +
-        "Payment integration will be connected next."
-      );
+
+      /* Check email */
+
+      if (!email.includes("@")) {
+
+        alert(
+          "Please enter a valid email address."
+        );
+
+        return;
+      }
+
+
+      /* Find bundle price */
+
+      const bundleOption =
+        document.querySelector(
+          "#bundle option:checked"
+        );
+
+      const amount =
+        Number(
+          bundleOption.getAttribute("data-price")
+        );
+
+
+      if (!amount) {
+
+        alert(
+          "Please select a valid bundle."
+        );
+
+        return;
+      }
+
+
+      /* Create a unique order reference */
+
+      const reference =
+        "IDGH-" +
+        Date.now() +
+        "-" +
+        Math.floor(
+          Math.random() * 10000
+        );
+
+
+      /* Start Paystack checkout */
+
+      const popup =
+        new PaystackPop();
+
+
+      popup.newTransaction({
+
+        key: PAYSTACK_PUBLIC_KEY,
+
+        email: email,
+
+        amount: amount * 100,
+
+        currency: "GHS",
+
+        phone: phone,
+
+        reference: reference,
+
+
+        metadata: {
+
+          network: network,
+
+          bundle: bundle,
+
+          phone: phone,
+
+          amount_ghs: amount
+
+        },
+
+
+        onSuccess: function(transaction) {
+
+          alert(
+            "Payment successful!\n\n" +
+
+            "Reference: " +
+            transaction.reference +
+
+            "\n\n" +
+
+            "Network: " +
+            network +
+
+            "\n" +
+
+            "Bundle: " +
+            bundle +
+
+            "\n" +
+
+            "Phone: " +
+            phone +
+
+            "\n\n" +
+
+            "Your order has been received."
+          );
+
+        },
+
+
+        onCancel: function() {
+
+          alert(
+            "Payment was cancelled."
+          );
+
+        },
+
+
+        onError: function(error) {
+
+          alert(
+            "Payment could not be completed.\n\n" +
+            error.message
+          );
+
+        }
+
+      });
+
     }
+
   </script>
 
 </body>
