@@ -16,7 +16,7 @@ module.exports = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: "Unable to connect to GhanaDataHub"
+      message: error.message
     });
   }
 };
